@@ -1,2 +1,39 @@
+<h1>Welcome to Dashboard</h1>
+
+<p><b>Your Role:</b> {{ role }}</p>
+
 <button (click)="logout()">Logout</button>
-<p>dashboard works!</p>
+
+<hr>
+
+<!-- OWNER ONLY -->
+<div *ngIf="role === 'OWNER'">
+  <h3>Owner Panel</h3>
+  <p>Manage users, reports, departments</p>
+</div>
+
+<!-- MANAGER + OWNER -->
+<div *ngIf="role === 'MANAGER' || role === 'OWNER'">
+  <h3>Manager Panel</h3>
+  <p>Manage rooms and inventory</p>
+</div>
+
+<!-- ALL USERS -->
+<div>
+  <h3>Common Panel</h3>
+  <p>View bookings</p>
+</div>
+
+<hr>
+
+<h3>User List</h3>
+
+<!--  DEBUG -->
+<p>Total users: {{ users.length }}</p>
+
+<!--  VISIBLE BOX -->
+<ul style="border:2px solid black; padding:10px;">
+  <li *ngFor="let user of users">
+    {{ user.name }} - {{ user.role }}
+  </li>
+</ul>

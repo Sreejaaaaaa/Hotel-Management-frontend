@@ -56,13 +56,6 @@ export class LoginComponent {
         // ✅ store token
         sessionStorage.setItem('token', res.token);
 
-        // ✅ TEMP TEST API CALL (VERY IMPORTANT)
-        this.http.get('http://localhost:8080/auth-service/users')
-          .subscribe({
-            next: (data) => console.log('Users:', data),
-            error: (err) => console.log('Users error:', err)
-          });
-
         // ✅ navigate to dashboard
         this.router.navigate(['/dashboard']);
       },
