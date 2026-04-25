@@ -1,1 +1,35 @@
-<p>rooms works!</p>
+<h2>Rooms</h2>
+
+<p><b>Your Role:</b> {{ role }}</p>
+<p style="color: green;" *ngIf="successMessage">
+  {{ successMessage }}
+</p>
+<hr>
+
+<!-- ADD ROOM (OWNER + MANAGER) -->
+<div *ngIf="role === 'OWNER' || role === 'MANAGER'">
+  <input [(ngModel)]="newRoom.type" placeholder="Room Type"  required/>
+  <input [(ngModel)]="newRoom.price" type="number" placeholder="Price" min="1" />
+  <button 
+  type="button"
+  (click)="addRoom()" 
+  [disabled]="isSubmitting || !newRoom.type || newRoom.price <= 0"
+>
+  Add Room
+</button>
+</div>
+
+<hr>
+
+<!-- ROOM LIST -->
+<ul>
+  <li *ngFor="let room of rooms">
+    {{ room.type }} - ₹{{ room.price }} - 
+    {{ room.available ? 'Available' : 'Booked' }}
+
+    <!-- DELETE ONLY OWNER -->
+    <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
+      Delete
+    </button>
+  </li>
+</ul>
