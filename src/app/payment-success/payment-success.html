@@ -1,0 +1,56 @@
+<div class="success-container">
+
+  <div class="success-card">
+
+    <!-- SUCCESS ICON -->
+    <div class="icon">✔</div>
+
+    <h2>Booking Confirmed</h2>
+    <p class="sub-text">Your payment was successful</p>
+
+    <!-- DETAILS -->
+    <div class="details">
+
+      <div class="row">
+        <span>Booking ID</span>
+        <strong>#{{ bookingId }}</strong>
+      </div>
+
+      <div class="row">
+        <span>Status</span>
+        <span class="status success">CONFIRMED</span>
+      </div>
+
+      <div class="row">
+        <span>Payment</span>
+        <span>Paid Successfully</span>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <span>Room Price</span>
+        <span>₹{{ baseAmount }}</span>
+      </div>
+
+      <div class="row">
+        <span>Taxes & Fees (10%)</span>
+        <span>₹{{ tax }}</span>
+      </div>
+
+      <div class="row total">
+        <strong>Total Paid</strong>
+        <strong>₹{{ amount }}</strong>
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button (click)="goToDashboard()">Go to Dashboard</button>
+      <button class="secondary" (click)="goToRooms()">Book Another</button>
+    </div>
+
+  </div>
+
+</div>

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   username = '';
   password = '';
@@ -64,6 +64,13 @@ export class LoginComponent {
         this.errorMessage = 'Invalid credentials';
       }
     });
+}
+
+ngOnInit() {
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    this.router.navigate(['/dashboard']);
+  }
 }
 
 }

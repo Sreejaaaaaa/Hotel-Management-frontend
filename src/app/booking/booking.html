@@ -1,1 +1,134 @@
-<p>booking works!</p>
+<!-- <h2>Booking Page</h2>
+
+<p>Room ID: {{ roomId }}</p>
+
+<input placeholder="Name" [(ngModel)]="bookingRequest.guest.name">
+<br><br>
+
+<input placeholder="Email" [(ngModel)]="bookingRequest.guest.email">
+<br><br>
+
+<input placeholder="Phone" [(ngModel)]="bookingRequest.guest.phone">
+<br><br>
+
+<input placeholder="Address" [(ngModel)]="bookingRequest.guest.address">
+<br><br>
+
+<input placeholder="Gender" [(ngModel)]="bookingRequest.guest.gender">
+<br><br>
+
+<button (click)="createBooking()">Confirm Booking</button> -->
+
+<!--  did last night 
+<div class="booking-card">
+  <h2>Booking</h2>
+
+  <p>Room ID: {{ roomId }}</p>
+  <p>Price: ₹{{ price }}</p>
+
+  <input placeholder="Name" [(ngModel)]="bookingRequest.guest.name">
+  <input placeholder="Email" [(ngModel)]="bookingRequest.guest.email">
+  <input placeholder="Phone" [(ngModel)]="bookingRequest.guest.phone">
+  <input placeholder="Address" [(ngModel)]="bookingRequest.guest.address">
+  <input placeholder="Gender" [(ngModel)]="bookingRequest.guest.gender">
+
+  <button (click)="createBooking()">Confirm Booking</button>
+</div> -->
+
+<div class="booking-container">
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h2>Guest Details</h2>
+
+    <form (ngSubmit)="createBooking()" #bookingForm="ngForm">
+
+  <!-- NAME -->
+  <label>Full Name</label>
+  <input 
+    name="name"
+    [(ngModel)]="bookingRequest.guest.name"
+    required
+    #name="ngModel"
+  />
+  <small class="error" *ngIf="name.invalid && name.touched">
+    Name is required
+  </small>
+
+  <!-- EMAIL -->
+  <label>Email</label>
+  <input 
+    name="email"
+    type="email"
+    [(ngModel)]="bookingRequest.guest.email"
+    required
+    email
+    #email="ngModel"
+  />
+  <small class="error" *ngIf="email.invalid && email.touched">
+    Enter a valid email
+  </small>
+
+  <!-- PHONE -->
+  <label>Phone</label>
+  <input 
+    name="phone"
+    [(ngModel)]="bookingRequest.guest.phone"
+    required
+    pattern="[0-9]{10}"
+    #phone="ngModel"
+  />
+  <small class="error" *ngIf="phone.invalid && phone.touched">
+    Enter valid 10-digit phone number
+  </small>
+
+  <!-- ADDRESS -->
+  <label>Address</label>
+  <input 
+    name="address"
+    [(ngModel)]="bookingRequest.guest.address"
+    required
+    #address="ngModel"
+  />
+  <small class="error" *ngIf="address.invalid && address.touched">
+    Address is required
+  </small>
+
+  <!-- GENDER -->
+  <label>Gender</label>
+  <select 
+    name="gender"
+    [(ngModel)]="bookingRequest.guest.gender"
+    required
+    #gender="ngModel"
+  >
+    <option value="">Select</option>
+    <option value="MALE">Male</option>
+    <option value="FEMALE">Female</option>
+  </select>
+  <small class="error" *ngIf="gender.invalid && gender.touched">
+    Please select gender
+  </small>
+
+  <!-- BUTTON -->
+  <button 
+    type="submit"
+    class="confirm-btn"
+    [disabled]="bookingForm.invalid || isLoading"
+  >
+    {{ isLoading ? 'Processing...' : 'Confirm Booking' }}
+  </button>
+
+</form>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-card">
+    <h3>Booking Summary</h3>
+
+    <p><strong>Room ID:</strong> {{ roomId }}</p>
+    <p><strong>Price:</strong> ₹{{ price }}</p>
+
+  </div>
+
+</div>

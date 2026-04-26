@@ -1,0 +1,52 @@
+<div class="payment-container">
+
+  <div class="payment-card">
+
+    <h2>Payment Summary</h2>
+
+    <p><strong>Booking ID:</strong> {{ bookingId }}</p>
+
+    <div class="price-box">
+
+      <div class="row">
+        <span>Room Price</span>
+        <span>₹{{ baseAmount | number }}</span>
+      </div>
+
+      <div class="row">
+        <span>Taxes & Fees (GST 10%)</span>
+        <span>₹{{ tax | number }}</span>
+      </div>
+
+      <hr>
+
+      <div class="row total">
+        <strong>Total</strong>
+        <strong>₹{{ amount | number }}</strong>
+      </div>
+
+    </div>
+    <p class="redirect-note">
+  You will be redirected to a secure payment gateway
+</p>
+    <button 
+  class="pay-btn"
+  (click)="payNow()" 
+  [disabled]="isPaying">
+
+  <span *ngIf="!isPaying">Pay Now</span>
+
+  <span *ngIf="isPaying" class="spinner-container">
+    <span class="spinner"></span>
+    Processing...
+  </span>
+
+</button>
+
+    <p class="secure-text">
+       Secure payment powered by Razorpay
+    </p>
+
+  </div>
+
+</div>

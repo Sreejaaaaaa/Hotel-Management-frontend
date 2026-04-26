@@ -1,0 +1,74 @@
+<!-- <div class="container">
+
+  <h2 class="title">All Bookings</h2>
+
+  <p *ngIf="isLoading">Loading...</p>
+
+  <div class="grid" *ngIf="!isLoading">
+
+    <div class="card" *ngFor="let b of bookings">
+
+      <h3>Booking #{{ b.id }}</h3>
+
+      <p><strong>Room:</strong> {{ b.roomId }}</p>
+
+      <p>
+        <strong>Status:</strong> 
+        <span [ngClass]="b.status === 'CONFIRMED' ? 'green' : 'red'">
+          {{ b.status }}
+        </span>
+      </p>
+
+    </div>
+
+  </div>
+
+</div> -->
+
+<div class="container">
+
+  <h2 class="title">All Bookings</h2>
+
+  <!-- LOADING -->
+  <p *ngIf="isLoading" class="loading">Loading bookings...</p>
+
+  <!-- EMPTY STATE -->
+  <p *ngIf="!isLoading && bookings.length === 0" class="empty">
+    No bookings found
+  </p>
+
+  <!-- GRID -->
+  <div class="grid" *ngIf="!isLoading && bookings.length > 0">
+
+    <div class="card" *ngFor="let b of bookings">
+
+      <!-- HEADER -->
+      <div class="card-header">
+        <h3>#{{ b.id }}</h3>
+        <span 
+          class="status"
+          [ngClass]="b.status === 'CONFIRMED' ? 'confirmed' : 'failed'">
+          {{ b.status }}
+        </span>
+      </div>
+
+      <!-- DETAILS -->
+      <div class="details">
+
+        <p><strong>Room:</strong> {{ b.roomId }}</p>
+
+        <p *ngIf="b.guest">
+          <strong>Guest:</strong> {{ b.guest.name }}
+        </p>
+
+        <p *ngIf="b.guest">
+          <strong>Email:</strong> {{ b.guest.email }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
