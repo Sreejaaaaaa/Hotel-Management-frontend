@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getUserRole();
     this.loadUsers();
+    this.loadRoomStats();
   }
 
   // ✅ Decode role from JWT
@@ -55,9 +56,37 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  // ✅ Logout
+  // Logout
   logout() {
     sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+
+  goToRooms() {
+  this.router.navigate(['/rooms']);
+}
+
+goToUsers() {
+  this.router.navigate(['/staff']);
+}
+
+goToBookings() {
+  this.router.navigate(['/booking-list']); 
+}
+
+totalRooms = 0;
+availableRooms = 0;
+bookedRooms = 0;
+
+loadRoomStats() {
+  this.http.get<any[]>('http://localhost:8080/room-service/rooms')
+    .subscribe(data => {
+      console.log("ROOM STATS DATA:", data); 
+      this.totalRooms = data.length;
+      this.availableRooms = data.filter(r => r.available).length;
+      this.bookedRooms = data.filter(r => !r.available).length;
+    });
+}
+
+
 }

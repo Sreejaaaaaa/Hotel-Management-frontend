@@ -1,0 +1,180 @@
+/* .title {
+  text-align: center;
+}
+
+.role {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.room-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.room-card {
+  background: white;
+  padding: 20px;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.status {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.available {
+  color: green;
+}
+
+.booked {
+  color: red;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.title {
+  text-align: center;
+}
+
+.role {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ADD ROOM */
+.add-room {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.add-room input,
+.add-room select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 150px;
+}
+
+.add-room button {
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-room button:hover {
+  opacity: 0.9;
+}
+
+/* GRID */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.room-card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+}
+
+/* PRICE */
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* STATUS */
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.available {
+  background: #d4edda;
+  color: #155724;
+}
+
+.booked {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* BUTTONS */
+button {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* BOOK BUTTON */
+.book-btn {
+  background: #28a745;
+  color: white;
+}
+
+.book-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* DELETE BUTTON */
+.delete {
+  background: #dc3545;
+  color: white;
+}
+
+
+/* FILTER */
+.filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.filter select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

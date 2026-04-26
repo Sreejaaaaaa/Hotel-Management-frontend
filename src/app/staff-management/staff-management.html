@@ -1,0 +1,50 @@
+<div class="container">
+
+  <h2 class="title">Staff Management</h2>
+
+  <div class="layout">
+
+    <!-- LEFT: FORM -->
+    <div class="left">
+
+      <div class="form-card">
+        <h3>Add Staff</h3>
+
+        <input placeholder="Full Name" [(ngModel)]="newStaff.name">
+        <input placeholder="Email" [(ngModel)]="newStaff.email">
+        <input type="password" placeholder="Password" [(ngModel)]="newStaff.password">
+
+        <select [(ngModel)]="newStaff.role">
+          <option value="">Select Role</option>
+          <option value="OWNER">Owner</option>
+          <option value="MANAGER">Manager</option>
+          <option value="RECEPTIONIST">Receptionist</option>
+        </select>
+
+        <button (click)="addStaff()" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Adding...' : 'Add Staff' }}
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: STAFF LIST -->
+    <div class="right">
+
+      <p *ngIf="isLoading">Loading staff...</p>
+
+      <div class="grid" *ngIf="!isLoading">
+
+        <div class="card" *ngFor="let s of staff">
+          <h3>{{ s.name || 'No Name' }}</h3>
+          <p><strong>Email:</strong> {{ s.email }}</p>
+          <p><strong>Role:</strong> {{ s.role || 'N/A' }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

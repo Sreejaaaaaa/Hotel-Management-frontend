@@ -1,0 +1,82 @@
+/* .booking-card {
+  background: white;
+  width: 300px;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.booking-card input {
+  width: 90%;
+}  did last night */   
+
+
+
+.booking-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* FORM */
+.form-card {
+  width: 350px;
+  padding: 25px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-card label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.form-card input,
+.form-card select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTON */
+.confirm-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-btn:disabled {
+  background: #ccc;
+}
+
+/* SUMMARY */
+.summary-card {
+  width: 250px;
+  padding: 25px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}

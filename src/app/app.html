@@ -1,8 +1,21 @@
-<nav style="background:#333; padding:10px;">
-  <a routerLink="/dashboard" style="color:white; margin-right:15px;">Dashboard</a>
-  <a routerLink="/rooms" style="color:white; margin-right:15px;">Rooms</a>
-  <a routerLink="/booking" style="color:white;">Booking</a>
+<!-- <nav class="navbar">
+  <h3>Hotel Management</h3>
+
+  <div>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/rooms">Rooms</a>
+  </div>
+</nav>
+
+<router-outlet></router-outlet> -->
+
+<nav class="navbar">
+  <div class="nav-left">Hotel Management</div>
+
+  <div class="nav-right">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/rooms">Rooms</a>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
-

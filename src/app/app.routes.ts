@@ -35,15 +35,16 @@
 
 import { Routes } from '@angular/router';
 
+import { PaymentSuccess } from './payment-success/payment-success';
+import { PaymentFailed } from './payment-failed/payment-failed';
 import { authGuard } from './guard/auth.guard';
 import { LoginComponent } from './login/login';
 import { DashboardComponent } from './dashboard/dashboard';
 import { RoomsComponent } from './rooms/rooms';
 import { BookingComponent } from './booking/booking';
-
-// 👉 YOU will add these
-// import { PaymentComponent } from './payment/payment';
-// import { ConfirmationComponent } from './confirmation/confirmation';
+import { Payment } from './payment/payment';
+import { StaffManagement } from './staff-management/staff-management';
+import { BookingListComponent } from './booking-list/booking-list';
 
 export const routes: Routes = [
 
@@ -63,25 +64,42 @@ export const routes: Routes = [
     canActivate: [authGuard]   
   },
 
-  // ✅ FIXED (important)
   {
     path: 'booking/:roomId',
     component: BookingComponent,
     canActivate: [authGuard]
   },
 
-  // ✅ YOUR PART
-  // {
-  //   path: 'payment/:bookingId',
-  //   component: PaymentComponent,
-  //   canActivate: [authGuard]
-  // },
+  {
+    path: 'payment-success',
+    component: PaymentSuccess
+  },
+  {
+    path: 'payment-failed',
+    component: PaymentFailed
+  },
 
-  // // ✅ FINAL STEP
-  // {
-  //   path: 'confirmation',
-  //   component: ConfirmationComponent,
-  //   canActivate: [authGuard]
-  // }
+  {
+    path: 'payment/:bookingId',
+    component: Payment,
+    canActivate: [authGuard]
+  },
+  {
+  path: 'booking-list',
+  component: BookingListComponent,
+  canActivate: [authGuard]
+  },
+  {
+  path: 'staff',
+  component: StaffManagement,
+  canActivate: [authGuard]
+},
+
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
+  
+  
 
 ];
