@@ -18,7 +18,6 @@ export class Payment {
 
   isPaying = false;
 
-  // UI breakdown (frontend simulated)
   baseAmount: number = 0;
   tax: number = 0;
 
@@ -33,13 +32,11 @@ export class Payment {
     this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
     this.orderId = this.route.snapshot.queryParamMap.get('orderId') || '';
 
-    // Protect route 
     if (!this.bookingId || !this.amount || !this.orderId) {
       this.router.navigate(['/rooms']);
       return;
     }
 
-    // Frontend-only breakdown (UI purpose)
     this.baseAmount = Math.round(this.amount / 1.1);
     this.tax = this.amount - this.baseAmount;
   }

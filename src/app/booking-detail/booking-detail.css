@@ -1,0 +1,86 @@
+.container {
+  padding: 30px;
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* STATES */
+.loading {
+  text-align: center;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}
+
+/* CARD */
+.card {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+}
+
+.card p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+/* STATUS COLORS */
+.status {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.cancelled {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+/* ACTIONS */
+.actions {
+  margin-top: 20px;
+  text-align: right;
+}
+
+/* BUTTON */
+.cancel-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #c82333;
+}

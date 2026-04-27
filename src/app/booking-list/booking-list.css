@@ -1,11 +1,22 @@
+.container {
+  padding: 20px;
+}
+
+/* TITLE */
 .title {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* STATES */
 .loading, .empty {
   text-align: center;
   color: #666;
+}
+
+.error {
+  text-align: center;
+  color: red;
 }
 
 /* GRID */
@@ -22,6 +33,13 @@
   border-radius: 10px;
   border: 1px solid #eee;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 /* HEADER */
@@ -50,8 +68,55 @@
   color: #721c24;
 }
 
+.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.cancelled {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
 /* DETAILS */
 .details p {
   margin: 6px 0;
   font-size: 14px;
+}
+
+/* SUCCESS */
+.success {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* FILTER TABS */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.tabs button {
+  padding: 8px 16px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.tabs button:hover {
+  background: #ddd;
+}
+
+.tabs button.active {
+  background: #2c3e50;
+  color: white;
 }

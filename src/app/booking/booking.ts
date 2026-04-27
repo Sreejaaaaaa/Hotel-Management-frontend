@@ -37,13 +37,11 @@ export class BookingComponent {
   price: any;
   ngOnInit() {
   this.roomId = this.route.snapshot.paramMap.get('roomId');
-
-  this.price = this.route.snapshot.queryParamMap.get('price'); 
-
+  this.price = this.route.snapshot.queryParamMap.get('price');
   this.bookingRequest.booking.roomId = this.roomId;
 
-  console.log("Room ID:", this.roomId);
-  console.log("Price:", this.price);
+  //console.log("Room ID:", this.roomId);
+  //console.log("Price:", this.price);
 }
 isLoading = false;
 createBooking() {
@@ -63,7 +61,6 @@ createBooking() {
         return;
       }
 
-      //CALL PAYMENT SERVICE
       this.http.post<any>(
         'http://localhost:8080/payment-service/payments',
         {
@@ -73,7 +70,7 @@ createBooking() {
       ).subscribe({
         next: (paymentRes) => {
           this.isLoading = false;
-          //OPEN RAZORPAY
+
           this.router.navigate(['/payment', bookingId], {
             queryParams: {
               amount: paymentRes.amount,
@@ -106,16 +103,13 @@ openRazorpay(paymentData: any, bookingId: number) {
 
   const options = {
     key: 'rzp_test_SfFKhRVFXwNZQB',
-
     amount: paymentData.amount,
     currency: 'INR',
-
     order_id: paymentData.orderId,
 
     handler: (response: any) => {
       console.log("Payment Success:", response);
 
-      //  VERIFY PAYMENT
       this.http.post('http://localhost:8080/payment-service/payments/verify', {
         orderId: response.razorpay_order_id,
         paymentId: response.razorpay_payment_id
@@ -123,7 +117,6 @@ openRazorpay(paymentData: any, bookingId: number) {
 
         next: () => {
 
-          //  UPDATE BOOKING STATUS
           this.http.put(
             `http://localhost:8080/booking-service/booking/update/${bookingId}`,
             {
@@ -133,7 +126,7 @@ openRazorpay(paymentData: any, bookingId: number) {
           ).subscribe({
 
             next: () => {
-              // REDIRECT TO SUCCESS PAGE
+
               this.router.navigate(['/payment-success'], {
                 queryParams: {
                   bookingId: bookingId,
@@ -166,7 +159,6 @@ openRazorpay(paymentData: any, bookingId: number) {
 
   const rzp = new (window as any).Razorpay(options);
 
-  //  HANDLE FAILURE
   rzp.on('payment.failed', (response: any) => {
     console.error("Payment Failed:", response);
 

@@ -1,70 +1,86 @@
-<!-- <div class="container">
-
-  <h2 class="title">All Bookings</h2>
-
-  <p *ngIf="isLoading">Loading...</p>
-
-  <div class="grid" *ngIf="!isLoading">
-
-    <div class="card" *ngFor="let b of bookings">
-
-      <h3>Booking #{{ b.id }}</h3>
-
-      <p><strong>Room:</strong> {{ b.roomId }}</p>
-
-      <p>
-        <strong>Status:</strong> 
-        <span [ngClass]="b.status === 'CONFIRMED' ? 'green' : 'red'">
-          {{ b.status }}
-        </span>
-      </p>
-
-    </div>
-
-  </div>
-
-</div> -->
-
 <div class="container">
 
   <h2 class="title">All Bookings</h2>
+  <!-- FILTER TABS -->
+<div class="tabs">
+
+  <button 
+    (click)="activeTab='ALL'"
+    [class.active]="activeTab==='ALL'">
+    All
+  </button>
+
+  <button 
+    (click)="activeTab='ACTIVE'"
+    [class.active]="activeTab==='ACTIVE'">
+    Active
+  </button>
+
+  <button 
+    (click)="activeTab='CANCELLED'"
+    [class.active]="activeTab==='CANCELLED'">
+    Cancelled
+  </button>
+
+  <button 
+    (click)="activeTab='FAILED'"
+    [class.active]="activeTab==='FAILED'">
+    Failed
+  </button>
+
+</div>
+  <!-- SUCCESS -->
+  <div *ngIf="successMessage" class="success">
+    {{ successMessage }}
+  </div>
 
   <!-- LOADING -->
-  <p *ngIf="isLoading" class="loading">Loading bookings...</p>
+  <p *ngIf="isLoading" class="loading">Loading...</p>
 
-  <!-- EMPTY STATE -->
-  <p *ngIf="!isLoading && bookings.length === 0" class="empty">
-    No bookings found
+  <!-- ERROR -->
+  <p *ngIf="!isLoading && errorMessage" class="error">
+    {{ errorMessage }}
+  </p>
+
+  <!-- EMPTY -->
+  <p *ngIf="!isLoading && filteredBookings.length === 0" class="empty">
+    No bookings available
   </p>
 
   <!-- GRID -->
-  <div class="grid" *ngIf="!isLoading && bookings.length > 0">
+  <div class="grid" *ngIf="!isLoading && filteredBookings.length > 0">
 
-    <div class="card" *ngFor="let b of bookings">
+    <div 
+      class="card"
+      *ngFor="let b of filteredBookings"
+      (click)="openBooking(b.bookingId)"
+    >
 
       <!-- HEADER -->
       <div class="card-header">
-        <h3>#{{ b.id }}</h3>
+        <h3>#{{ b.bookingId }}</h3>
+
         <span 
           class="status"
-          [ngClass]="b.status === 'CONFIRMED' ? 'confirmed' : 'failed'">
+          [ngClass]="{
+            'confirmed': b.status === 'CONFIRMED',
+            'pending': b.status === 'PENDING',
+            'failed': b.status === 'FAILED',
+            'cancelled': b.status === 'CANCELLED'
+          }">
           {{ b.status }}
         </span>
       </div>
 
       <!-- DETAILS -->
       <div class="details">
-
         <p><strong>Room:</strong> {{ b.roomId }}</p>
 
-        <p *ngIf="b.guest">
-          <strong>Guest:</strong> {{ b.guest.name }}
-        </p>
+        <!-- If backend gives guest object -->
+        <p *ngIf="b.guest"><strong>Guest:</strong> {{ b.guest.name }}</p>
 
-        <p *ngIf="b.guest">
-          <strong>Email:</strong> {{ b.guest.email }}
-        </p>
-
+        <!-- fallback -->
+        <p *ngIf="!b.guest"><strong>Guest ID:</strong> {{ b.guestId }}</p>
       </div>
 
     </div>

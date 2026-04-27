@@ -1,147 +1,81 @@
-<!-- <h1>Welcome to Dashboard</h1>
+<div class="layout">
 
-<p><b>Your Role:</b> {{ role }}</p>
+  <div class="sidebar">
 
-<button (click)="logout()">Logout</button>
+    <h2 class="logo">HMS</h2>
 
-<hr>
+    <ul>
 
-<div *ngIf="role === 'OWNER'">
-  <h3>Owner Panel</h3>
-  <p>Manage users, reports, departments</p>
-</div>
+      <li (click)="goToDashboard()">Dashboard</li>
 
-<div *ngIf="role === 'MANAGER' || role === 'OWNER'">
-  <h3>Manager Panel</h3>
-  <p>Manage rooms and inventory</p>
-</div>
+      <li *ngIf="role === 'OWNER'" (click)="goToUsers()">
+        Staff Management
+      </li>
 
-<div>
-  <h3>Common Panel</h3>
-  <p>View bookings</p>
-</div>
+      <li *ngIf="role === 'OWNER' || role === 'MANAGER'" (click)="goToRooms()">
+        Rooms
+      </li>
 
-<hr>
+      <!-- ALL -->
+      <li (click)="goToBookings()">
+        Bookings
+      </li>
 
-<h3>User List</h3>
+      <li (click)="logout()">Logout</li>
 
-<p>Total users: {{ users.length }}</p>
+    </ul>
 
-<ul style="border:2px solid black; padding:10px;">
-  <li *ngFor="let user of users">
-    {{ user.name }} - {{ user.role }}
-  </li>
-</ul>
-
-<button routerLink="/rooms">Go to Rooms</button> -->
-
-
-
-<!--  not a kind off real world 
-<div class="card-grid">
-
-  <div class="card" *ngIf="role === 'OWNER'">
-    <h3>Owner Panel</h3>
-    <p>Manage users, reports</p>
   </div>
 
-  
-  <div class="card" *ngIf="role === 'MANAGER' || role === 'OWNER'">
-    <h3>Manager Panel</h3>
-    <p>Manage rooms and inventory</p>
-  </div>
+  <div class="main">
 
- 
-  <div class="card">
-    <h3>Common Panel</h3>
-    <p>View bookings</p>
-  </div>
+    <h2>Dashboard</h2>
+    <p>Welcome, {{ role }}</p>
 
-</div>
-<button routerLink="/rooms">Go to Rooms</button> -->
+    <div class="stats">
 
-<!-- <div class="container">
+      <div class="stat-box">
+        <h3>{{ totalRooms }}</h3>
+        <p>Total Rooms</p>
+      </div>
 
-  <h2 class="title">Welcome to Dashboard</h2>
+      <div class="stat-box">
+        <h3>{{ availableRooms }}</h3>
+        <p>Available</p>
+      </div>
 
-  <p class="role">Your Role: {{ role }}</p>
+      <div class="stat-box">
+        <h3>{{ bookedRooms }}</h3>
+        <p>Booked</p>
+      </div>
 
-  <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+    <h3 style="margin-top:30px;">Recent Bookings</h3>
 
-  <div class="card-grid">
+<div class="recent-bookings">
 
-    <div class="card" *ngIf="role === 'OWNER'" (click)="goToUsers()">
-      <h3>Owner Panel</h3>
-      <p>Manage users, reports</p>
+ <div class="recent-grid">
+
+  <div class="recent-card" *ngFor="let b of bookings.slice(0,5)">
+
+    <div class="card-header">
+      <h4>#{{ b.bookingId }}</h4>
+      <span 
+  [ngClass]="{
+    'confirmed': b.status === 'CONFIRMED',
+    'pending': b.status === 'PENDING',
+    'failed': b.status === 'FAILED'
+  }">
+  {{ b.status }}
+</span>
     </div>
 
-    <div class="card" *ngIf="role === 'OWNER' || role === 'MANAGER'" (click)="goToRooms()">
-      <h3>Room Management</h3>
-      <p>Manage rooms and inventory</p>
-    </div>
+    <p><strong>Room:</strong> {{ b.roomId }}</p>
+    <p><strong>Guest:</strong> {{ b.guestId }}</p>
 
-    <div class="card" (click)="goToBookings()">
-      <h3>Bookings</h3>
-      <p>View all bookings</p>
-    </div>
-
-  </div>
-
-</div> -->
-
-
-
-<div class="container">
-
-  <h2 class="title">Dashboard</h2>
-  <p class="role">Welcome, {{ role }}</p>
-
-  <button class="logout-btn" (click)="logout()">Logout</button>
-
-  <div class="card-grid">
-
-    <!-- OWNER ONLY -->
-    <div class="card" *ngIf="role === 'OWNER'" (click)="goToUsers()">
-      <h3>Staff Management</h3>
-      <p>Manage hotel staff accounts</p>
-    </div>
-
-    <!-- OWNER + MANAGER -->
-    <div class="card" *ngIf="role === 'OWNER' || role === 'MANAGER'" (click)="goToRooms()">
-      <h3>Manage Rooms</h3>
-      <p>Add, update, delete rooms</p>
-    </div>
-
-    <!-- ALL USERS -->
-    <div class="card" (click)="goToBookings()">
-      <h3>Bookings</h3>
-      <p>View and manage reservations</p>
-    </div>
-
-    <!-- OPTIONAL: INVENTORY
-    <div class="card" *ngIf="role !== 'RECEPTIONIST'">
-      <h3>Inventory</h3>
-      <p>Manage hotel inventory</p>
-    </div> -->
-
-  </div>
-  <div class="stats">
-
-  <div class="stat-box">
-    <h3>{{ totalRooms }}</h3>
-    <p>Total Rooms</p>
-  </div>
-
-  <div class="stat-box">
-    <h3>{{ availableRooms }}</h3>
-    <p>Available</p>
-  </div>
-
-  <div class="stat-box">
-    <h3>{{ bookedRooms }}</h3>
-    <p>Booked</p>
   </div>
 
 </div>
+  </div>
 
 </div>
