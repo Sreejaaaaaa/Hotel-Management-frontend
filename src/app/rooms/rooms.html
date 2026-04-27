@@ -1,162 +1,19 @@
- <!-- <h2>Rooms</h2>    1st one
+<div class="container">
 
-<p><b>Your Role:</b> {{ role }}</p>
-
-<p style="color: green;" *ngIf="successMessage">
-  {{ successMessage }}
-</p>
-
-<hr>
-
-<div *ngIf="role === 'OWNER' || role === 'MANAGER'">
-  <input [(ngModel)]="newRoom.type" placeholder="Room Type" required />
-  <input [(ngModel)]="newRoom.price" type="number" placeholder="Price" min="1" />
-
-  <button 
-    type="button"
-    (click)="addRoom()" 
-    [disabled]="isSubmitting || !newRoom.type || newRoom.price <= 0">
-    Add Room
-  </button>
-</div>
-
-<hr>
-
-<ul>
-  <li *ngFor="let room of rooms">
-    {{ room.type }} - ₹{{ room.price }} - 
-    {{ room.available ? 'Available' : 'Booked' }}
-
-    <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
-      Delete
-    </button>
-
-    <button 
-  (click)="goToBooking(room)" 
-  [disabled]="!room.available">
-  {{ room.available ? 'Book' : 'Already Booked' }}
-</button>
-  </li>
-</ul>  -->
-
-
-
-<!-- 
-<h2 class="title">Rooms</h2>
-
-<p class="role">Your Role: {{ role }}</p>
-
-<div class="room-container">
-  <div class="room-card" *ngFor="let room of rooms">
-
-    <h3>{{ room.type }}</h3>
-    <p>₹{{ room.price }}</p>
-
-    <span 
-      class="status" 
-      [ngClass]="room.available ? 'available' : 'booked'">
-      {{ room.available ? 'Available' : 'Booked' }}
-    </span>
-
-    <div class="actions">
-      <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
-        Delete
-      </button>
-
-      <button 
-        (click)="goToBooking(room)" 
-        [disabled]="!room.available">
-        Book
-      </button>
+  <!-- HERO -->
+  <div class="hero">
+    <img src="/assets/images/hotel_banner.jpg" alt="Hotel" />
+    <div class="overlay">
+      <h1>Luxury Hotel Experience</h1>
+      <p>Book your perfect stay</p>
     </div>
-
   </div>
-</div> -->
 
-
-<!-- 
-<div class="container">
-  <h2>Rooms</h2>
-
-  <p><b>Your Role:</b> {{ role }}</p>
-  <div class="room-container">
-  <div class="room-card" *ngFor="let room of rooms">
-
-    <h3>{{ room.type }}</h3>
-    <p>₹{{ room.price }}</p>
-
-    <span 
-      class="status" 
-      [ngClass]="room.available ? 'available' : 'booked'">
-      {{ room.available ? 'Available' : 'Booked' }}
-    </span>
-
-    <div class="actions">
-      <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
-        Delete
-      </button>
-
-      <button 
-        (click)="goToBooking(room)" 
-        [disabled]="!room.available">
-        Book
-      </button>
-    </div>
-
-  </div>
-  
-</div> -->
-
-<!-- <div class="room-grid">    given at night
-  <div class="room-card" *ngFor="let room of rooms">
-
-    <h3>{{ room.type }}</h3>
-    <p>Price: ₹{{ room.price }}</p>
-    <p>Status: {{ room.available ? 'Available' : 'Booked' }}</p>
-
-    <button 
-      (click)="goToBooking(room)" 
-      [disabled]="!room.available">
-      {{ room.available ? 'Book Now' : 'Booked' }}
-    </button>
-
-    <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
-      Delete
-    </button>
-
-  </div>
-</div> -->
-
-<!-- this was given now in morning 
-<div class="container">
-  <h2>Rooms</h2>
-
-  <p><b>Your Role:</b> {{ role }}</p>
-
-  <ul>
-    <li *ngFor="let room of rooms">
-      {{ room.type }} - ₹{{ room.price }} - 
-      {{ room.available ? 'Available' : 'Booked' }}
-
-      <button 
-        (click)="goToBooking(room)" 
-        [disabled]="!room.available">
-        {{ room.available ? 'Book' : 'Already Booked' }}
-      </button>
-
-      <button *ngIf="role === 'OWNER'" (click)="deleteRoom(room.id)">
-        Delete
-      </button>
-    </li>
-  </ul>
-</div> -->
-
-<div class="container">
-
+  <!-- TITLE -->
   <h2 class="title">Rooms</h2>
   <p class="role">Your Role: {{ role }}</p>
 
-  <!-- 🔥 FILTER DROPDOWN -->
+  <!-- FILTER -->
   <div class="filter">
     <select [(ngModel)]="filterType">
       <option value="ALL">All Rooms</option>
@@ -191,13 +48,20 @@
   </div>
 
   <!-- EMPTY -->
-  <p *ngIf="filteredRooms.length === 0" style="text-align:center;">
+  <p *ngIf="filteredRooms.length === 0" class="empty">
     No rooms found
   </p>
 
   <!-- ROOM GRID -->
   <div class="room-grid">
     <div class="room-card" *ngFor="let room of filteredRooms">
+
+      <!-- ROOM IMAGE -->
+      <img 
+        class="room-img"
+        [src]="'assets/images/room' + (room.id % 4 + 1) + '.jpg'" 
+        alt="Room"
+      />
 
       <h3>{{ room.type }}</h3>
       <p class="price">₹{{ room.price }}</p>
@@ -218,9 +82,9 @@
         </button>
 
         <button 
-          *ngIf="role === 'OWNER'" 
+          *ngIf="role === 'OWNER' && room.available"
           class="delete"
-          (click)="deleteRoom(room.id)">
+          (click)="deleteRoom(room.id, room)">
           Delete
         </button>
 

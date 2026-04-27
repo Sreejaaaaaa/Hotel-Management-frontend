@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h2 class="title">Booking Details</h2>
+
+  <!-- LOADING -->
+  <p *ngIf="isLoading" class="loading">Loading...</p>
+
+  <!-- ERROR -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <!-- DATA -->
+  <div *ngIf="!isLoading && booking" class="card">
+
+    <h3>Booking #{{ booking.bookingId }}</h3>
+
+    <p><strong>Status:</strong> 
+      <span [ngClass]="{
+        'status confirmed': booking.status === 'CONFIRMED',
+        'status pending': booking.status === 'PENDING',
+        'status cancelled': booking.status === 'CANCELLED'
+      }">
+        {{ booking.status }}
+      </span>
+    </p>
+
+    <p><strong>Room ID:</strong> {{ booking.roomId }}</p>
+
+    <!-- GUEST -->
+    <div *ngIf="booking.guest">
+      <h4>Guest Details</h4>
+      <p><strong>Name:</strong> {{ booking.guest.name }}</p>
+      <p><strong>Email:</strong> {{ booking.guest.email }}</p>
+      <p><strong>Phone:</strong> {{ booking.guest.phone }}</p>
+    </div>
+
+    <!-- ACTION -->
+    <div class="actions" *ngIf="booking.status !== 'CANCELLED'">
+
+      <button class="cancel-btn" (click)="cancelBooking()">
+        Cancel Booking
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

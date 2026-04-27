@@ -16,21 +16,29 @@ export class DashboardComponent implements OnInit {
 
   role: string = '';
   users: any[] = [];
-
+  bookings: any[] = [];
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cd: ChangeDetectorRef   // 👈 IMPORTANT
+    private cd: ChangeDetectorRef   
   ) {}
 
-  // ✅ Runs after component initializes
   ngOnInit() {
     this.getUserRole();
     this.loadUsers();
     this.loadRoomStats();
+    this.http.get<any[]>(
+  'http://localhost:8080/booking-service/booking/all'
+).subscribe({
+  next: (data) => {
+    this.bookings = data;
+  },
+  error: (err) => {
+    console.error(err);
+  }
+});
   }
 
-  // ✅ Decode role from JWT
   getUserRole() {
     const token = sessionStorage.getItem('token');
 
@@ -41,7 +49,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // ✅ Fetch users from backend
   loadUsers() {
     this.http.get<any[]>('http://localhost:8080/user-service/users')
       .subscribe({
@@ -50,13 +57,12 @@ export class DashboardComponent implements OnInit {
 
           this.users = data;
 
-          this.cd.detectChanges(); // 🔥 FORCE UI UPDATE
+          this.cd.detectChanges(); 
         },
         error: (err) => console.log("Error:", err)
       });
   }
 
-  // Logout
   logout() {
     sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
@@ -73,6 +79,9 @@ goToUsers() {
 goToBookings() {
   this.router.navigate(['/booking-list']); 
 }
+goToDashboard() {
+  this.router.navigate(['/dashboard']);
+}
 
 totalRooms = 0;
 availableRooms = 0;
@@ -81,7 +90,7 @@ bookedRooms = 0;
 loadRoomStats() {
   this.http.get<any[]>('http://localhost:8080/room-service/rooms')
     .subscribe(data => {
-      console.log("ROOM STATS DATA:", data); 
+      //console.log("ROOM STATS DATA:", data); 
       this.totalRooms = data.length;
       this.availableRooms = data.filter(r => r.available).length;
       this.bookedRooms = data.filter(r => !r.available).length;

@@ -19,27 +19,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // onLogin() {
-  //   const loginData = {
-  //     email: this.username,
-  //     password: this.password
-  //   };
 
-  //   console.log("Sending:", loginData);
-
-  //   this.http.post('http://localhost:8080/auth-service/auth/login', loginData)
-  //     .subscribe({
-  //       next: (res: any) => {
-  //         console.log('Login success', res);
-  //         sessionStorage.setItem('token', res.token); //store token in session storage
-  //         this.router.navigate(['/dashboard']);
-  //       },
-  //       error: (err) => {
-  //         console.log(err);
-  //         this.errorMessage = 'Invalid credentials';
-  //       }
-  //     });
-  // }
   onLogin() {
   const loginData = {
     email: this.username,
@@ -53,10 +33,8 @@ export class LoginComponent implements OnInit{
       next: (res: any) => {
         console.log('Login success', res);
 
-        // ✅ store token
         sessionStorage.setItem('token', res.token);
 
-        // ✅ navigate to dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
